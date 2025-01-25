@@ -44,7 +44,7 @@ export default function ComparisonSlide() {
             onHoverEnd={() => setIsHovered(false)}
           >
             <a 
-              href="https://github.com/yourusername/coffee-presentation"
+              href="https://github.com/tzvetan5/coffee-presentation"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-lg text-primary hover:text-primary/80 transition-colors"
