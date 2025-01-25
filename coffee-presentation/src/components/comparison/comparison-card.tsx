@@ -44,7 +44,7 @@ export function ComparisonCard({ item, activeMetric, maxValue, isHovered, onHove
       onHoverStart={() => onHover(item.name)}
       onHoverEnd={() => onHover(null)}
     >
-      {item.isChampion && (
+      {item.isChampion && activeMetric !== "drawbacks" && (
         <motion.div
           className="absolute -top-3 left-1/2 -translate-x-1/2 z-10"
           initial={{ y: -20, opacity: 0 }}
@@ -57,6 +57,20 @@ export function ComparisonCard({ item, activeMetric, maxValue, isHovered, onHove
           </Badge>
         </motion.div>
       )}
+      {activeMetric === "drawbacks" && item.name === "Green Tea" && (
+        <motion.div
+          className="absolute -top-3 left-1/2 -translate-x-1/2 z-10"
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          <Badge className="bg-primary text-primary-foreground px-2 py-0.5 flex items-center gap-1 text-xs">
+            <Crown className="w-3 h-3" />
+            Most Effective Option
+          </Badge>
+        </motion.div>
+      )}
+
 
       <motion.div
         className={`rounded-xl overflow-hidden
@@ -104,7 +118,7 @@ export function ComparisonCard({ item, activeMetric, maxValue, isHovered, onHove
                     transition={{ duration: 0.8, type: "spring", bounce: 0.3 }}
                   >
                     <div
-                      className={`absolute inset-0 bg-gradient-to-t from-white/20 to-white/5 rounded-t-lg backdrop-blur-sm
+                      className={`absolute inset-0 bg-white/30 rounded-t-lg backdrop-blur-sm
                                    ${item.isChampion ? "border-t-2 border-primary" : ""}`}
                     >
                       <AnimatePresence mode="wait">

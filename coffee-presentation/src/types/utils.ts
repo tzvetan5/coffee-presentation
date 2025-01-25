@@ -9,15 +9,15 @@ export interface Metric {
 export interface ComparisonItem {
     name: string
     icon: string
-    duration: number // Normalized 0-100 based on hours
-    caffeine: number // Normalized 0-100 based on mg content
-    longTerm: number // Normalized 0-100 based on research evidence
-    benefits: number // Normalized 0-100 based on proven health benefits
-    drawbacks: number // Normalized 0-100 based on severity of drawbacks
+    duration: number
+    caffeine: number
+    longTerm: number 
+    benefits: number 
+    drawbacks: number 
     color: string
     isChampion?: boolean
     details: {
         [key in MetricKey]: string
     }
-    benefits_list: string[] // Keep existing benefits array for tooltips
+    benefits_list: string[] 
 }

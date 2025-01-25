@@ -3,44 +3,25 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { motion } from "framer-motion"
 import { useState } from "react"
-import { Coffee, Heart, Briefcase, Code, Rocket } from "lucide-react"
 
 export default function ComparisonSlide() {
-  const [isHovered, setIsHovered] = useState<string | null>(null)
+  const [activeStep, setActiveStep] = useState<number | null>(null)
 
-  const entrepreneurs = [
+  const steps = [
     {
-      name: "Elon Musk",
-      role: "Tech Startup CEO",
-      icon: <Rocket className="h-6 w-6" />,
-      quote: "Wow, steak & eggs with coffee in the morning really feels like a powerup!",
-      stats: {
-        coffeesPerDay: 4,
-        companiesStarted: 6,
-        hoursWorked: 100
-      }
+      title: "Superior Focus",
+      description: "Coffee sharpens your mind and helps you concentrate",
+      color: "from-primary/20 to-primary/40"
     },
     {
-      name: "Marcus Rivera", 
-      role: "Serial Entrepreneur",
-      icon: <Briefcase className="h-6 w-6" />,
-      quote: "My morning coffee ritual sets me up for daily success.",
-      stats: {
-        coffeesPerDay: 3,
-        startupExists: 2,
-        revenueGenerated: "12M"
-      }
+      title: "Longest Duration", 
+      description: "Feel alert and focused for 4-6 hours, no crashes",
+      color: "from-secondary/20 to-secondary/40"
     },
     {
-      name: "Alex Kim",
-      role: "Tech Lead",
-      icon: <Code className="h-6 w-6" />,
-      quote: "Coffee is essential for solving complex engineering challenges.",
-      stats: {
-        coffeesPerDay: 5,
-        codeCommits: 2500,
-        bugsSquashed: 342
-      }
+      title: "Simplest and Mostly Available",
+      description: "Packed with antioxidants that boost your wellbeing",
+      color: "from-primary/30 to-secondary/30"
     }
   ]
 
@@ -51,92 +32,71 @@ export default function ComparisonSlide() {
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
         
         <motion.div 
-          className="relative z-10 flex flex-col items-center gap-12 text-center max-w-4xl"
+          className="relative z-10 flex flex-col items-center gap-16 text-center max-w-5xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="space-y-6">
-            <h2 className="text-5xl font-bold text-primary">
-              Coffee-Fueled Success Stories
-            </h2>
-            <p className="text-xl text-muted-foreground">
-              Discover how coffee powers innovation and drives extraordinary achievements
-            </p>
-          </div>
+          <h2 className="text-6xl font-bold text-primary">
+            Why Coffee Works
+          </h2>
 
-          <div className="grid grid-cols-3 gap-8 w-full">
-            {entrepreneurs.map((entrepreneur, index) => (
+          <div className="flex flex-col gap-6 w-full">
+            {steps.map((step, index) => (
               <motion.div
-                key={entrepreneur.name}
+                key={step.title}
                 className={`
-                  p-8 rounded-xl bg-primary/5 border border-primary/10
-                  backdrop-blur-sm transition-all duration-300 cursor-pointer
-                  ${isHovered === entrepreneur.name ? 'scale-105 bg-primary/10' : 'scale-100'}
+                  p-10 rounded-xl border border-primary/10
+                  backdrop-blur-sm transition-all duration-500 cursor-pointer
+                  bg-gradient-to-br ${step.color}
+                  ${activeStep === index ? 'shadow-2xl translate-x-10 scale-105' : 'hover:shadow-lg hover:translate-x-5'}
                 `}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2 }}
-                onHoverStart={() => setIsHovered(entrepreneur.name)}
-                onHoverEnd={() => setIsHovered(null)}
+                style={{
+                  marginLeft: `${index * 120}px`,
+                  marginTop: `${index * 20}px`,
+                  zIndex: steps.length - index
+                }}
+                initial={{ opacity: 0, x: -100, y: 100 }}
+                animate={{ 
+                  opacity: 1, 
+                  x: 0, 
+                  y: 0
+                }}
+                transition={{ 
+                  delay: index * 0.3,
+                  duration: 0.7,
+                  type: "spring",
+                  stiffness: 100
+                }}
+                onHoverStart={() => setActiveStep(index)}
+                onHoverEnd={() => setActiveStep(null)}
               >
-                <div className="flex flex-col items-center gap-4">
-                  <motion.div 
-                    className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center"
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.5 }}
+                <div className="text-left">
+                  <h3 className="text-3xl font-bold mb-4">{step.title}</h3>
+                  <motion.p 
+                    className="text-xl text-muted-foreground"
+                    initial={{ opacity: 0 }}
+                    animate={activeStep === index ? 
+                      { opacity: 1, x: 20 } : 
+                      { opacity: 0.8, x: 0 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    {entrepreneur.icon}
-                  </motion.div>
-                  <h3 className="text-xl font-semibold">{entrepreneur.name}</h3>
-                  <p className="text-sm text-primary/80">{entrepreneur.role}</p>
-                  
-                  <motion.div 
-                    className="w-full space-y-3 mt-2"
-                    initial={false}
-                    animate={isHovered === entrepreneur.name ? { height: "auto", opacity: 1 } : { height: "auto", opacity: 0.7 }}
-                  >
-                    <div className="text-sm font-medium">
-                      {Object.entries(entrepreneur.stats).map(([key, value]) => (
-                        <motion.div 
-                          key={key}
-                          className="flex items-center justify-between py-2 border-b border-primary/10"
-                          whileHover={{ x: 5 }}
-                        >
-                          <span className="text-muted-foreground capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</span>
-                          <span className="text-primary font-bold">{value}</span>
-                        </motion.div>
-                      ))}
-                    </div>
-                    
-                    <p className="text-muted-foreground italic text-sm mt-4">&ldquo;{entrepreneur.quote}&rdquo;</p>
-                  </motion.div>
+                    {step.description}
+                  </motion.p>
                 </div>
               </motion.div>
             ))}
           </div>
-
-          <motion.div
-            className="flex items-center gap-3 bg-primary/10 px-6 py-3 rounded-full"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            whileHover={{ scale: 1.05, backgroundColor: "rgba(var(--primary), 0.2)" }}
-          >
-            <Coffee className="h-5 w-5 text-primary" />
-            <p className="text-lg text-primary/90">Fuel your success with coffee</p>
-            <Heart className="h-5 w-5 text-primary" />
-          </motion.div>
         </motion.div>
 
         <motion.div
-          className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-primary/10 to-transparent"
+          className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-primary/10 to-transparent"
           animate={{
-            opacity: [0.2, 0.4, 0.2],
-            y: [0, -5, 0]
+            opacity: [0.2, 0.5, 0.2],
+            y: [0, -8, 0]
           }}
           transition={{
-            duration: 2,
+            duration: 3,
             repeat: Infinity,
             ease: "easeInOut"
           }}
