@@ -55,7 +55,7 @@ export default function ComparisonSlide() {
             </a>
 
             <p className="text-lg text-muted-foreground">
-              See you on the Selection Date :)
+              See you on the Selection Day :)
             </p>
           </motion.div>
         </motion.div>
