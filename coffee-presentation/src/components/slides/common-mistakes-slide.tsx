@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { motion, AnimatePresence } from "framer-motion"
 import { useState } from "react"
+import { ArrowDown } from "lucide-react"
 
 export default function CommonMistakesSlide() {
   const [hoveredProblem, setHoveredProblem] = useState<number | null>(null);
@@ -15,14 +16,14 @@ export default function CommonMistakesSlide() {
       color: "from-red-400/20 to-red-600/20",
       symptoms: [
         "Energy crashes",
-        "Jitters and anxiety", 
+        "Jitters and anxiety",
         "Dependency cycle",
         "Poor sleep quality"
       ]
     },
     {
       title: "Natural But Weak",
-      description: "Choosing gentle options that don't deliver", 
+      description: "Choosing gentle options that don't deliver",
       icon: "🌿",
       color: "from-orange-400/20 to-orange-600/20",
       symptoms: [
@@ -35,7 +36,7 @@ export default function CommonMistakesSlide() {
       title: "Sugar Dependence",
       description: "Hidden sugars in energy products",
       icon: "🍫",
-      color: "from-yellow-400/20 to-yellow-600/20", 
+      color: "from-yellow-400/20 to-yellow-600/20",
       symptoms: [
         "Blood sugar spikes",
         "Weight gain",
@@ -49,15 +50,15 @@ export default function CommonMistakesSlide() {
     <Card className="w-full overflow-hidden">
       <CardContent className="p-16 relative min-h-[800px] flex items-center">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/10 via-background to-background" />
-        
+
         <div className="space-y-12 w-full relative z-10">
-          <motion.div 
+          <motion.div
             className="text-center z-10 relative mb-12"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <motion.h2 
+            <motion.h2
               className="text-6xl font-bold text-primary mb-6 drop-shadow-lg"
               animate={{ scale: isHovered ? 1.05 : 1 }}
               transition={{ duration: 0.3 }}
@@ -66,7 +67,7 @@ export default function CommonMistakesSlide() {
             >
               Focus Mistakes to Avoid
             </motion.h2>
-            <motion.p 
+            <motion.p
               className="text-2xl text-muted-foreground"
               animate={{ opacity: isHovered ? 0.8 : 1 }}
               transition={{ duration: 0.3 }}
@@ -81,13 +82,13 @@ export default function CommonMistakesSlide() {
                 key={index}
                 className="relative cursor-pointer"
                 initial={{ opacity: 0, y: 30 }}
-                animate={{ 
+                animate={{
                   opacity: 1,
                   y: 0,
                   scale: expandedProblem === index ? 1.05 : 1,
                   zIndex: expandedProblem === index ? 10 : 1
                 }}
-                transition={{ 
+                transition={{
                   duration: 0.3,
                   delay: expandedProblem === null ? index * 0.2 : 0
                 }}
@@ -106,9 +107,9 @@ export default function CommonMistakesSlide() {
                   }}
                   transition={{ duration: 0.3 }}
                 >
-                  <motion.span 
+                  <motion.span
                     className="text-7xl mb-6"
-                    animate={{ 
+                    animate={{
                       scale: hoveredProblem === index ? [1, 1.2, 1] : 1,
                       rotate: hoveredProblem === index ? [0, -10, 10, 0] : 0
                     }}
@@ -116,12 +117,26 @@ export default function CommonMistakesSlide() {
                   >
                     {problem.icon}
                   </motion.span>
-                  <motion.h3 className="text-2xl font-bold text-primary mb-3">{problem.title}</motion.h3>
+                  <motion.h3 className="text-2xl font-bold text-text mb-3">{problem.title}</motion.h3>
                   <motion.p className="text-center text-muted-foreground mb-4">{problem.description}</motion.p>
-                  
+                  {expandedProblem !== index && (<motion.div
+                    className="absolute inset-x-0 bottom-8 mx-auto flex items-center gap-2 w-fit"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1 }}
+                  >
+                    <p className="text-muted-foreground text-sm">Click to explore</p>
+                    <motion.div
+                      animate={{ y: [0, 5, 0] }}
+                      transition={{ repeat: Infinity, duration: 1.5 }}
+                    >
+                      <ArrowDown className="w-6 h-6 text-text" />
+                    </motion.div>
+                  </motion.div>)}
+
                   <AnimatePresence>
                     {expandedProblem === index && (
-                      <motion.div 
+                      <motion.div
                         className="w-full"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}

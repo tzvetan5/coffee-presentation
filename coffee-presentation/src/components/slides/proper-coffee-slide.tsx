@@ -20,7 +20,7 @@ export default function ProperCoffeeSlide() {
       icon: "⏱️",
     },
     caffeine: {
-      label: "Caffeine Content", 
+      label: "Caffeine Content",
       description: "Amount per serving",
       icon: "⚡",
     },
@@ -63,7 +63,7 @@ export default function ProperCoffeeSlide() {
     },
     {
       name: "Green Tea",
-      icon: "🍵", 
+      icon: "🍵",
       duration: 60,
       caffeine: 40,
       longTerm: 80,
@@ -163,9 +163,18 @@ export default function ProperCoffeeSlide() {
 
   return (
     <Card className="w-full overflow-hidden">
-      <CardContent className="p-16 h-[800px]">
+      <CardContent className="p-12 h-[800px]">
+
         <div className="space-y-8 relative">
+          <div className="flex justify-center">
+            <div className="inline-flex items-center gap-3 bg-primary/10 px-6 py-2.5 rounded-full">
+              <Crown className="w-5 h-5 text-primary" />
+              <p className="text-lg text-primary/90 font-medium">Coffee: The Undisputed Champion</p>
+            </div>
+          </div>
+
           <div className="relative z-10">
+
             <motion.div
               className="flex justify-center gap-6 mb-12"
               initial={{ opacity: 0, y: 20 }}
@@ -203,10 +212,7 @@ export default function ProperCoffeeSlide() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8 }}
             >
-              <div className="inline-flex items-center gap-3 bg-primary/10 px-6 py-2.5 rounded-full">
-                <Crown className="w-5 h-5 text-primary" />
-                <p className="text-lg text-primary/90 font-medium">Coffee: The Undisputed Champion</p>
-              </div>
+
 
               <div className="flex justify-center gap-6">
                 {["Superior Focus", "Longest Duration", "Maximum Benefits"].map((benefit, index) => (
