@@ -61,7 +61,7 @@ export default function CoffeePresentation({ page }: { page?: number }) {
   const CurrentSlideComponent = slides[currentSlide].component
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+    <div className="h-full bg-background flex items-center justify-center p-8">
       <div className="fixed top-4 left-4 right-4">
         <Progress value={((currentSlide + 1) / slides.length) * 100} className="w-full" />
       </div>

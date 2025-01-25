@@ -27,7 +27,7 @@ export default function ComparisonSlide() {
 
   return (
     <Card className="w-full overflow-hidden">
-      <CardContent className="p-16 relative min-h-[800px] flex items-center justify-center">
+      <CardContent className="p-8 relative min-h-[800px] flex items-center justify-center">
         <div className="absolute inset-0 bg-[url('/coffee-steam.jpg')] bg-cover bg-center opacity-30" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
         
@@ -38,7 +38,7 @@ export default function ComparisonSlide() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-6xl font-bold text-primary">
-            Why Coffee Works
+            Best Option - Coffee
           </h2>
 
           <div className="flex flex-col gap-6 w-full">
