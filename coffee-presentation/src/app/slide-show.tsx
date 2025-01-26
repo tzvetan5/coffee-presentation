@@ -66,7 +66,7 @@ export default function CoffeePresentation({ page }: { page?: number }) {
         <Progress value={((currentSlide + 1) / slides.length) * 100} className="w-full" />
       </div>
 
-      <div className="w-full max-w-7xl relative"> {/* Increased max-width to make the slide bigger */}
+      <div className="w-full max-w-7xl relative">
         <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16">
           <Button
             variant="outline"
@@ -95,13 +95,13 @@ export default function CoffeePresentation({ page }: { page?: number }) {
 
         <CurrentSlideComponent />
 
-        <div className="mt-4 flex justify-center gap-2">
+        <div className="mt-8 flex justify-center gap-4">
           {slides.map((_, index) => (
             <Button
               key={index}
               variant={currentSlide === index ? "default" : "outline"}
               size="icon"
-              className="w-3 h-3 rounded-full p-0"
+              className="w-4 h-4 rounded-full p-0 border-2 hover:scale-110 transition-transform"
               onClick={() => {
                 setCurrentSlide(index)
                 window.history.pushState({}, '', `?page=${index + 1}`)
